@@ -1,0 +1,675 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>From Miasma to Germ Theory</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;1,400&family=Source+Serif+4:ital,opsz,wght@0,8..60,300;0,8..60,400;1,8..60,300&display=swap" rel="stylesheet">
+<style>
+/* ── Reset & base ── */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+:root {
+  --ink:       #1a1410;
+  --ink2:      #3d3228;
+  --ink3:      #7a6a5a;
+  --ink4:      #b0a090;
+  --parchment: #f7f2e8;
+  --warm:      #ede5d0;
+  --line:      #d5c8b0;
+  --miasma:    #8b5e3c;
+  --trans:     #3d6e5a;
+  --germ:      #2c4e7a;
+  --accent-m:  #c8843c;
+  --accent-t:  #4a9470;
+  --accent-g:  #4472a8;
+  --bg-m:      #fdf5e6;
+  --bg-t:      #eef7f1;
+  --bg-g:      #eaf0f8;
+}
+
+html { scroll-behavior: smooth; }
+
+body {
+  font-family: 'Source Serif 4', Georgia, serif;
+  background: var(--parchment);
+  color: var(--ink);
+  font-size: 16px;
+  line-height: 1.7;
+}
+
+/* ── Header ── */
+.site-header {
+  background: var(--ink);
+  color: var(--parchment);
+  padding: 3.5rem 2rem 3rem;
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+}
+.site-header::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: repeating-linear-gradient(
+    0deg,
+    transparent,
+    transparent 28px,
+    rgba(255,255,255,0.03) 28px,
+    rgba(255,255,255,0.03) 29px
+  );
+}
+.header-eyebrow {
+  font-family: 'Source Serif 4', serif;
+  font-size: 11px;
+  font-weight: 300;
+  letter-spacing: .22em;
+  text-transform: uppercase;
+  color: var(--ink4);
+  margin-bottom: 1rem;
+  position: relative;
+}
+.site-header h1 {
+  font-family: 'Playfair Display', serif;
+  font-size: clamp(28px, 5vw, 52px);
+  font-weight: 600;
+  line-height: 1.15;
+  letter-spacing: -0.01em;
+  position: relative;
+  margin-bottom: .75rem;
+}
+.site-header h1 em {
+  font-style: italic;
+  font-weight: 400;
+  color: var(--accent-t);
+}
+.header-sub {
+  font-size: 15px;
+  font-weight: 300;
+  color: var(--ink4);
+  max-width: 560px;
+  margin: 0 auto;
+  position: relative;
+}
+.header-rule {
+  width: 60px;
+  height: 1px;
+  background: var(--ink3);
+  margin: 1.5rem auto 1.25rem;
+}
+
+/* ── Legend ── */
+.legend-bar {
+  background: var(--warm);
+  border-bottom: 1px solid var(--line);
+  padding: .75rem 2rem;
+  display: flex;
+  justify-content: center;
+  gap: 2rem;
+  flex-wrap: wrap;
+}
+.leg { display: flex; align-items: center; gap: 7px; font-size: 12px; font-weight: 300; letter-spacing: .04em; color: var(--ink2); }
+.leg-pip { width: 11px; height: 11px; border-radius: 50%; flex-shrink: 0; }
+
+/* ── Main layout ── */
+main {
+  max-width: 860px;
+  margin: 0 auto;
+  padding: 3rem 1.5rem 4rem;
+}
+
+/* ── Era label ── */
+.era-heading {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  margin: 2.5rem 0 1.25rem;
+}
+.era-heading:first-child { margin-top: 0; }
+.era-line { flex: 1; height: 1px; background: var(--line); }
+.era-tag {
+  font-size: 10px;
+  font-weight: 400;
+  letter-spacing: .18em;
+  text-transform: uppercase;
+  padding: 4px 12px;
+  border-radius: 20px;
+  white-space: nowrap;
+}
+.era-tag.miasma  { background: var(--bg-m); color: var(--miasma); border: 1px solid #e8c898; }
+.era-tag.trans   { background: var(--bg-t); color: var(--trans);   border: 1px solid #a8d4b8; }
+.era-tag.germ    { background: var(--bg-g); color: var(--germ);    border: 1px solid #a0c0e0; }
+
+/* ── Timeline track ── */
+.timeline { position: relative; padding-left: 44px; }
+.timeline::before {
+  content: '';
+  position: absolute;
+  left: 14px;
+  top: 6px;
+  bottom: 6px;
+  width: 1px;
+  background: var(--line);
+}
+
+/* ── Individual entry ── */
+.entry { position: relative; margin-bottom: 1.75rem; }
+
+.entry-dot {
+  position: absolute;
+  left: -37px;
+  top: 18px;
+  width: 15px;
+  height: 15px;
+  border-radius: 50%;
+  border: 2px solid var(--parchment);
+  box-shadow: 0 0 0 1px var(--line);
+  z-index: 2;
+}
+.entry-dot.miasma { background: var(--accent-m); box-shadow: 0 0 0 1px var(--miasma); }
+.entry-dot.trans  { background: var(--accent-t); box-shadow: 0 0 0 1px var(--trans);  }
+.entry-dot.germ   { background: var(--accent-g); box-shadow: 0 0 0 1px var(--germ);   }
+
+/* ── Card ── */
+.card {
+  background: #fff;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  overflow: hidden;
+  transition: box-shadow .2s, transform .15s;
+}
+.card:hover { box-shadow: 0 4px 20px rgba(0,0,0,.07); transform: translateY(-1px); }
+
+.card-inner { padding: 16px 18px 14px; }
+
+.card-top {
+  display: flex;
+  align-items: flex-start;
+  gap: 14px;
+  margin-bottom: 10px;
+}
+
+.portrait {
+  width: 56px;
+  height: 56px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 1px solid var(--line);
+  flex-shrink: 0;
+  background: var(--warm);
+}
+.portrait-placeholder {
+  width: 56px;
+  height: 56px;
+  border-radius: 50%;
+  background: var(--warm);
+  border: 1px solid var(--line);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 22px;
+  flex-shrink: 0;
+}
+
+.card-meta { flex: 1; min-width: 0; }
+.card-date { font-size: 11px; font-weight: 300; letter-spacing: .1em; color: var(--ink3); margin-bottom: 2px; }
+.card-name { font-family: 'Playfair Display', serif; font-size: 17px; font-weight: 600; color: var(--ink); line-height: 1.2; margin-bottom: 3px; }
+.card-pub  { font-size: 12px; font-style: italic; font-weight: 300; color: var(--ink3); line-height: 1.4; margin-bottom: 5px; }
+
+.card-tag {
+  display: inline-block;
+  font-size: 10px;
+  font-weight: 400;
+  letter-spacing: .08em;
+  padding: 2px 9px;
+  border-radius: 12px;
+}
+.card-tag.miasma { background: var(--bg-m); color: var(--miasma); }
+.card-tag.trans  { background: var(--bg-t); color: var(--trans);  }
+.card-tag.germ   { background: var(--bg-g); color: var(--germ);   }
+
+.card-key {
+  font-size: 14px;
+  line-height: 1.6;
+  color: var(--ink2);
+  margin-bottom: 10px;
+  font-weight: 400;
+}
+
+/* ── Expand toggle ── */
+.expand-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  font-family: 'Source Serif 4', serif;
+  font-size: 11px;
+  font-weight: 300;
+  letter-spacing: .08em;
+  color: var(--ink3);
+  background: transparent;
+  border: 1px solid var(--line);
+  border-radius: 4px;
+  padding: 4px 11px;
+  cursor: pointer;
+  transition: background .15s, color .15s;
+}
+.expand-btn:hover { background: var(--warm); color: var(--ink); }
+.expand-btn .arr { transition: transform .2s; display: inline-block; }
+.expand-btn.open .arr { transform: rotate(90deg); }
+
+/* ── Expanded details ── */
+.card-details {
+  display: none;
+  border-top: 1px solid var(--line);
+  padding: 14px 18px 16px;
+  background: var(--parchment);
+}
+.card-details.open { display: block; }
+.card-details ul { padding-left: 18px; }
+.card-details li {
+  font-size: 13px;
+  font-weight: 300;
+  line-height: 1.65;
+  color: var(--ink2);
+  margin-bottom: 6px;
+}
+.card-details li::marker { color: var(--ink4); }
+
+/* ── Footer ── */
+footer {
+  background: var(--ink);
+  color: var(--ink4);
+  text-align: center;
+  padding: 2rem 1.5rem;
+  font-size: 12px;
+  font-weight: 300;
+  letter-spacing: .06em;
+}
+
+/* ── Scroll animation ── */
+.entry { opacity: 0; transform: translateY(18px); transition: opacity .45s ease, transform .45s ease; }
+.entry.visible { opacity: 1; transform: none; }
+
+/* ── Responsive ── */
+@media (max-width: 600px) {
+  .timeline { padding-left: 32px; }
+  .timeline::before { left: 10px; }
+  .entry-dot { left: -27px; width: 13px; height: 13px; }
+  .card-top { gap: 10px; }
+  .portrait, .portrait-placeholder { width: 44px; height: 44px; font-size: 18px; }
+  .card-name { font-size: 15px; }
+  main { padding: 2rem 1rem 3rem; }
+}
+
+/* ── Print ── */
+@media print {
+  .entry { opacity: 1 !important; transform: none !important; }
+  .card-details { display: block !important; }
+  .expand-btn { display: none; }
+  .site-header { background: #000; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+}
+</style>
+</head>
+<body>
+
+<header class="site-header">
+  <p class="header-eyebrow">History of Medicine · Microbiology</p>
+  <h1>From Miasma<br>to <em>Germ Theory</em></h1>
+  <div class="header-rule"></div>
+  <p class="header-sub">2,300 years of belief, the scientists who challenged it, and the evidence that changed medicine forever.</p>
+</header>
+
+<div class="legend-bar">
+  <div class="leg"><div class="leg-pip" style="background:var(--accent-m)"></div> Miasma era</div>
+  <div class="leg"><div class="leg-pip" style="background:var(--accent-t)"></div> Transitional evidence</div>
+  <div class="leg"><div class="leg-pip" style="background:var(--accent-g)"></div> Germ theory established</div>
+</div>
+
+<main>
+
+  <!-- MIASMA ERA -->
+  <div class="era-heading">
+    <div class="era-line"></div>
+    <span class="era-tag miasma">Miasma foundations &nbsp;·&nbsp; Antiquity – 1540s</span>
+    <div class="era-line"></div>
+  </div>
+
+  <div class="timeline">
+
+    <!-- Hippocrates -->
+    <div class="entry">
+      <div class="entry-dot miasma"></div>
+      <div class="card">
+        <div class="card-inner">
+          <div class="card-top">
+            <div class="portrait-placeholder">🏛️</div>
+            <div class="card-meta">
+              <div class="card-date">c. 400 BCE</div>
+              <div class="card-name">Hippocrates</div>
+              <div class="card-pub">On Airs, Waters, and Places</div>
+              <span class="card-tag miasma">Origin of miasma theory</span>
+            </div>
+          </div>
+          <p class="card-key">"Bad air" rising from swamps and rotting matter causes illness. A logical explanation for a real pattern — but wrong about the mechanism. This doctrine would dominate medicine for over 2,000 years.</p>
+          <button class="expand-btn" onclick="toggleCard(this)"><span class="arr">▶</span> Context &amp; significance</button>
+        </div>
+        <div class="card-details">
+          <ul>
+            <li>People near marshes genuinely were sicker more often — we now know this was due to mosquito-borne malaria, not air. Hippocrates identified a real pattern and explained it the only way available at the time.</li>
+            <li>Without microscopes or germ theory, disease had to be explained through observable phenomena: smell, decay, and environmental change.</li>
+            <li>The theory was internally consistent and had predictive value — telling people to avoid swamps did reduce disease, even if for the wrong reason.</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <!-- Galen -->
+    <div class="entry">
+      <div class="entry-dot miasma"></div>
+      <div class="card">
+        <div class="card-inner">
+          <div class="card-top">
+            <div class="portrait-placeholder">📜</div>
+            <div class="card-meta">
+              <div class="card-date">c. 160–210 CE</div>
+              <div class="card-name">Galen of Pergamon</div>
+              <div class="card-pub">Various medical treatises</div>
+              <span class="card-tag miasma">Miasma codified as doctrine</span>
+            </div>
+          </div>
+          <p class="card-key">Systematised Hippocratic miasma into canonical medical doctrine. Endorsed by the Catholic Church and enshrined in European universities for over a millennium — challenging Galen was professionally dangerous.</p>
+          <button class="expand-btn" onclick="toggleCard(this)"><span class="arr">▶</span> Context &amp; significance</button>
+        </div>
+        <div class="card-details">
+          <ul>
+            <li>Galenic medicine became the unquestionable authority in European medicine through the Middle Ages and Renaissance.</li>
+            <li>The institutionalisation of his theory made intellectual dissent very costly — later reformers like Semmelweis paid a heavy personal price.</li>
+            <li>Understanding why miasma persisted requires understanding the power of institutions: the Church, universities, and medical guilds all had interests in maintaining established doctrine.</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+  </div><!-- /timeline -->
+
+  <!-- TRANSITIONAL ERA -->
+  <div class="era-heading">
+    <div class="era-line"></div>
+    <span class="era-tag trans">Transitional evidence &nbsp;·&nbsp; 1546 – 1855</span>
+    <div class="era-line"></div>
+  </div>
+
+  <div class="timeline">
+
+    <!-- Fracastoro -->
+    <div class="entry">
+      <div class="entry-dot trans"></div>
+      <div class="card">
+        <div class="card-inner">
+          <div class="card-top">
+            <div class="portrait-placeholder">📖</div>
+            <div class="card-meta">
+              <div class="card-date">1546</div>
+              <div class="card-name">Girolamo Fracastoro</div>
+              <div class="card-pub">De Contagione et Contagiosis Morbis</div>
+              <span class="card-tag trans">First contagion theory</span>
+            </div>
+          </div>
+          <p class="card-key">Proposed that disease spreads via tiny transferable "seeds of disease" (<em>seminaria morbi</em>) — by touch, contaminated objects (<em>fomites</em>), and at a distance. A conceptual precursor to germ theory, 338 years too early to prove.</p>
+          <button class="expand-btn" onclick="toggleCard(this)"><span class="arr">▶</span> Context &amp; significance</button>
+        </div>
+        <div class="card-details">
+          <ul>
+            <li>No microscope existed to prove the "seeds" were real — the first microscope capable of revealing microorganisms was still 130 years away.</li>
+            <li>His ideas were largely ignored because miasma better fitted everyday observations.</li>
+            <li>Fracastoro coined the word <em>fomites</em> — objects that can carry infection — a term still in use today in infection control.</li>
+            <li>His work demonstrates that the right idea, without the right technology or institutional support, cannot become accepted science.</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <!-- Leeuwenhoek -->
+    <div class="entry">
+      <div class="entry-dot trans"></div>
+      <div class="card">
+        <div class="card-inner">
+          <div class="card-top">
+            <div class="portrait-placeholder">🔬</div>
+            <div class="card-meta">
+              <div class="card-date">1676 – 1683</div>
+              <div class="card-name">Antonie van Leeuwenhoek</div>
+              <div class="card-pub">Letters to the Royal Society of London</div>
+              <span class="card-tag trans">Microorganisms discovered</span>
+            </div>
+          </div>
+          <p class="card-key">First person to observe living microorganisms ("animalcules") using self-crafted lenses achieving ~270× magnification. Proved a microscopic living world exists — the essential prerequisite for all germ theory that followed.</p>
+          <button class="expand-btn" onclick="toggleCard(this)"><span class="arr">▶</span> Context &amp; significance</button>
+        </div>
+        <div class="card-details">
+          <ul>
+            <li>A cloth draper by trade, he ground his own lenses — a craft technology that gave him microscopes far superior to any available commercially.</li>
+            <li>The Royal Society initially doubted his claims. Robert Hooke independently replicated his findings, providing the verification that gained acceptance.</li>
+            <li>He did not link microorganisms to disease — that step required another 200 years and further technological development.</li>
+            <li>His work was the indispensable technological foundation: without knowing microbes existed, no one could blame them for disease.</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <!-- Bassi -->
+    <div class="entry">
+      <div class="entry-dot trans"></div>
+      <div class="card">
+        <div class="card-inner">
+          <div class="card-top">
+            <img class="portrait" src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/5f/Agostino_Bassi.jpg/220px-Agostino_Bassi.jpg" alt="Agostino Bassi" onerror="this.outerHTML='<div class=\'portrait-placeholder\'>🧫</div>'">
+            <div class="card-meta">
+              <div class="card-date">1835</div>
+              <div class="card-name">Agostino Bassi</div>
+              <div class="card-pub">Del mal del segno (On Muscardine Disease)</div>
+              <span class="card-tag trans">First experimental proof: microbe causes disease</span>
+            </div>
+          </div>
+          <p class="card-key">Proved for the first time that a microorganism — a parasitic fungus — causes a specific disease in silkworms. The first experimental demonstration that a living agent causes disease, anticipating Koch's Postulates by 49 years.</p>
+          <button class="expand-btn" onclick="toggleCard(this)"><span class="arr">▶</span> Context &amp; significance</button>
+        </div>
+        <div class="card-details">
+          <ul>
+            <li>Used compound microscopes — a direct technological debt to Leeuwenhoek's foundational lens work 160 years earlier.</li>
+            <li>The Italian silk industry was economically critical; silkworm disease caused major losses, providing funding urgency that purely academic research could not command.</li>
+            <li>Pasteur directly acknowledged Bassi's work when he later investigated pébrine disease in silkworms in the 1860s.</li>
+            <li>His experimental logic — isolate the organism, demonstrate causation, re-isolate — foreshadowed Koch's formal four-step methodology.</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <!-- Semmelweis -->
+    <div class="entry">
+      <div class="entry-dot trans"></div>
+      <div class="card">
+        <div class="card-inner">
+          <div class="card-top">
+            <img class="portrait" src="https://upload.wikimedia.org/wikipedia/commons/thumb/f/f5/Ignaz_Semmelweis_1860.jpg/220px-Ignaz_Semmelweis_1860.jpg" alt="Ignaz Semmelweis" onerror="this.outerHTML='<div class=\'portrait-placeholder\'>🏥</div>'">
+            <div class="card-meta">
+              <div class="card-date">1847 – 1861</div>
+              <div class="card-name">Ignaz Semmelweis</div>
+              <div class="card-pub">Clinical data, Vienna (1847) · Die Ätiologie... (1861)</div>
+              <span class="card-tag trans">Statistical proof of transmission — rejected</span>
+            </div>
+          </div>
+          <p class="card-key">Showed that childbed fever mortality fell from ~18% to under 2% when doctors washed hands before deliveries. Disease was transmitted on hands — not air. The evidence was airtight. The medical establishment rejected it anyway.</p>
+          <button class="expand-btn" onclick="toggleCard(this)"><span class="arr">▶</span> Context &amp; significance</button>
+        </div>
+        <div class="card-details">
+          <ul>
+            <li><strong>The natural experiment:</strong> Ward 1 (doctors who performed autopsies): ~10–18% mortality. Ward 2 (midwives who did not): ~1–2%. The difference was undeniable — and it pointed to doctors, not air.</li>
+            <li>He lacked the germ theory framework to explain why handwashing worked. He described "cadaverous particles" but could not identify them as microorganisms.</li>
+            <li>Without a mechanism, the establishment dismissed his statistics. Germ theory had not yet been established to make his evidence make sense.</li>
+            <li>He died in a psychiatric institution aged 47, likely from the same type of infection he had spent his career fighting. Pasteur's later work retroactively validated everything Semmelweis had found.</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <!-- Snow -->
+    <div class="entry">
+      <div class="entry-dot trans"></div>
+      <div class="card">
+        <div class="card-inner">
+          <div class="card-top">
+            <img class="portrait" src="https://upload.wikimedia.org/wikipedia/commons/thumb/c/c3/John_Snow.jpg/220px-John_Snow.jpg" alt="John Snow" onerror="this.outerHTML='<div class=\'portrait-placeholder\'>🗺️</div>'">
+            <div class="card-meta">
+              <div class="card-date">1854 – 1855</div>
+              <div class="card-name">John Snow</div>
+              <div class="card-pub">On the Mode of Communication of Cholera, 2nd ed. (1855)</div>
+              <span class="card-tag trans">Epidemiological proof — waterborne disease</span>
+            </div>
+          </div>
+          <p class="card-key">Mapped 616 cholera deaths around a single water pump on Broad Street, London. Door-to-door interviews revealed contaminated water — not miasma — as the cause. The founding act of modern epidemiology.</p>
+          <button class="expand-btn" onclick="toggleCard(this)"><span class="arr">▶</span> Context &amp; significance</button>
+        </div>
+        <div class="card-details">
+          <ul>
+            <li>Used no microscope — his proof was geographic, statistical, and social. He interviewed survivors and mapped cases house by house across Soho.</li>
+            <li><strong>Key natural experiment:</strong> A brewery whose workers drank beer (not pump water) had zero cases. A widow far from Broad Street died — she had pump water delivered because she liked the taste.</li>
+            <li>Convinced the local Board of Governors to remove the pump handle, ending the outbreak — a landmark of evidence-based public health intervention.</li>
+            <li>Built on William Farr's vital statistics system, which provided the mortality data Snow needed to analyse. Snow's work was collaborative, not solo.</li>
+            <li>Koch would not identify <em>Vibrio cholerae</em> until 1883 — Snow proved waterborne transmission 29 years before the bacterium was identified.</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+  </div><!-- /timeline -->
+
+  <!-- GERM THEORY ERA -->
+  <div class="era-heading">
+    <div class="era-line"></div>
+    <span class="era-tag germ">Germ theory proven &amp; formalised &nbsp;·&nbsp; 1857 – 1884</span>
+    <div class="era-line"></div>
+  </div>
+
+  <div class="timeline">
+
+    <!-- Pasteur -->
+    <div class="entry">
+      <div class="entry-dot germ"></div>
+      <div class="card">
+        <div class="card-inner">
+          <div class="card-top">
+            <img class="portrait" src="https://upload.wikimedia.org/wikipedia/commons/thumb/e/e0/Louis_Pasteur%2C_foto_av_Félix_Nadar.jpg/220px-Louis_Pasteur%2C_foto_av_Félix_Nadar.jpg" alt="Louis Pasteur" onerror="this.outerHTML='<div class=\'portrait-placeholder\'>🧪</div>'">
+            <div class="card-meta">
+              <div class="card-date">1857 – 1863</div>
+              <div class="card-name">Louis Pasteur</div>
+              <div class="card-pub">Fermentation papers (1857) · Swan-neck flask experiments (1859–61) · Germ Theory of Fermentation (1863)</div>
+              <span class="card-tag germ">Spontaneous generation disproved; germ theory established</span>
+            </div>
+          </div>
+          <p class="card-key">Disproved spontaneous generation using swan-neck flasks and proved that microorganisms — not chemical processes — cause fermentation and putrefaction. Extended the logic to disease, providing the mechanistic framework that Semmelweis and Snow had lacked.</p>
+          <button class="expand-btn" onclick="toggleCard(this)"><span class="arr">▶</span> Context &amp; significance</button>
+        </div>
+        <div class="card-details">
+          <ul>
+            <li><strong>The swan-neck flask:</strong> Broth in a flask with a long S-curved neck stayed sterile indefinitely (air entered but particles could not settle). When the neck was broken, microorganisms grew within days. Elegant, decisive, repeatable.</li>
+            <li>Built on Leeuwenhoek (microbes exist), Bassi (a microbe can cause disease), and Fracastoro's conceptual framework — a direct chain of scientific dependency.</li>
+            <li>Funded partly by the French wine and beer industry to solve spoilage problems — commercial pressure accelerated research that changed the world.</li>
+            <li>Endorsed by the French Academy of Sciences, whose prestige gave his findings international authority and reach.</li>
+            <li>Directly inspired Lister's antiseptic surgery. Pasteur's laboratory science became Lister's bedside practice within four years.</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <!-- Lister -->
+    <div class="entry">
+      <div class="entry-dot germ"></div>
+      <div class="card">
+        <div class="card-inner">
+          <div class="card-top">
+            <img class="portrait" src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/55/Joseph_Lister_1902.jpg/220px-Joseph_Lister_1902.jpg" alt="Joseph Lister" onerror="this.outerHTML='<div class=\'portrait-placeholder\'>⚕️</div>'">
+            <div class="card-meta">
+              <div class="card-date">1865 – 1867</div>
+              <div class="card-name">Joseph Lister</div>
+              <div class="card-pub">On the Antiseptic Principle in the Practice of Surgery — <em>The Lancet</em>, 1867</div>
+              <span class="card-tag germ">Germ theory applied to surgery</span>
+            </div>
+          </div>
+          <p class="card-key">Applied Pasteur's germ theory to surgery: carbolic acid (phenol) sterilised wounds and instruments, cutting post-amputation mortality from ~45% to under 15%. The first clinical proof that killing germs prevents infection.</p>
+          <button class="expand-btn" onclick="toggleCard(this)"><span class="arr">▶</span> Context &amp; significance</button>
+        </div>
+        <div class="card-details">
+          <ul>
+            <li>Explicitly credited Pasteur's publications as his theoretical foundation — a rare public acknowledgement showing how science builds on prior work.</li>
+            <li>Carbolic acid was already used industrially to treat sewage in Carlisle. Lister borrowed a civil engineering technology and applied it to medicine.</li>
+            <li>Published in <em>The Lancet</em> for immediate reach across the British medical establishment, though full acceptance still took nearly a decade.</li>
+            <li>Provided the first large-scale clinical evidence bridging laboratory germ theory and real-world patient outcomes — transforming science into practice.</li>
+            <li>Retroactively validated Semmelweis's handwashing findings, which had been dismissed 18 years earlier for lacking exactly this mechanistic explanation.</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <!-- Koch -->
+    <div class="entry">
+      <div class="entry-dot germ"></div>
+      <div class="card">
+        <div class="card-inner">
+          <div class="card-top">
+            <img class="portrait" src="https://upload.wikimedia.org/wikipedia/commons/thumb/b/b0/Robert_Koch_BeW.jpg/220px-Robert_Koch_BeW.jpg" alt="Robert Koch" onerror="this.outerHTML='<div class=\'portrait-placeholder\'>🏆</div>'">
+            <div class="card-meta">
+              <div class="card-date">1876 – 1884</div>
+              <div class="card-name">Robert Koch</div>
+              <div class="card-pub">Anthrax (1876) · Tuberculosis (1882) · Cholera (1883) · Koch's Postulates (1884)</div>
+              <span class="card-tag germ">Germ theory formalised with a rigorous methodology</span>
+            </div>
+          </div>
+          <p class="card-key">Identified the specific bacteria causing anthrax, tuberculosis, and cholera. Then codified four rules — Koch's Postulates — to prove any microorganism causes any disease. Germ theory was no longer a compelling argument; it was a repeatable scientific methodology.</p>
+          <button class="expand-btn" onclick="toggleCard(this)"><span class="arr">▶</span> Context &amp; significance</button>
+        </div>
+        <div class="card-details">
+          <ul>
+            <li><strong>Koch's Four Postulates:</strong> (1) The microorganism must be found in all cases. (2) It must be isolated and grown in pure culture. (3) The cultured organism must cause disease in a healthy host. (4) It must be re-isolated from the experimentally diseased host.</li>
+            <li><strong>Technology:</strong> Aniline dyes (from the German chemical industry) stained bacteria for microscopic identification. Solid agar culture plates — the agar suggested by Angelina Fanny Hesse, often uncredited — enabled pure bacterial colonies to be grown.</li>
+            <li>Also used photomicrography to document findings, allowing global verification and replication.</li>
+            <li>Worked in direct competitive rivalry with Pasteur — their competition accelerated both men's pace and tightened methodological standards across the field.</li>
+            <li>Koch's 1882 TB announcement was witnessed by Paul Ehrlich, who called it "the greatest scientific event" of his life. Ehrlich went on to found immunology and modern chemotherapy.</li>
+            <li>Awarded the Nobel Prize in Physiology or Medicine in 1905. His Postulates remain the logical backbone of infectious disease causation research today.</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+  </div><!-- /timeline -->
+
+</main>
+
+<footer>
+  <p>History of Medicine · Miasma to Germ Theory · For educational use</p>
+</footer>
+
+<script>
+function toggleCard(btn) {
+  const card = btn.closest('.card');
+  const details = card.querySelector('.card-details');
+  const isOpen = details.classList.toggle('open');
+  btn.classList.toggle('open', isOpen);
+  btn.querySelector('.arr').textContent = isOpen ? '▼' : '▶';
+  const label = btn.querySelector('.arr').nextSibling;
+}
+
+// Scroll-reveal
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); observer.unobserve(e.target); } });
+}, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
+
+document.querySelectorAll('.entry').forEach((el, i) => {
+  el.style.transitionDelay = (i % 3) * 60 + 'ms';
+  observer.observe(el);
+});
+</script>
+</body>
+</html>
